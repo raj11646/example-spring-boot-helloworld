@@ -1,15 +1,15 @@
 #!/usr/bin/env groovy
 import java.text.SimpleDateFormat
 def version = ""
-def serviceName = "adapter"
-def serviceDirectory = "adapter"
+def serviceName = "helloworld"
+def serviceDirectory = "helloworld"
 def skipBuild = false
 def deployCI = false
 def deployQA = false
 def deployProd = false
-def scanPaths = ["adapter", "cmsdal", "oo-commons"]
+//def scanPaths = ["adapter", "cmsdal", "oo-commons"]
 def registry = ""
-def ciGroup = "csit"
+def ciGroup = "dev"
 def qaGroup = "staging"
 def prodGroup = "prod"
 def buildServiceUrl = "https://5yfganz8bb.execute-api.us-east-1.amazonaws.com/prod/service/${serviceName}/builds"
@@ -32,13 +32,13 @@ pipeline {
           if (branchName == "master") {
             deployCI = true
             version = VersionNumber (versionNumberString: '${BUILDS_TODAY}', versionPrefix: "${serviceName}-b${format}.")
-            registry = "devaxregistry.azurecr.io"
+            registry = "raj11646"
           } else {
             deployQA = true
             deployProd = true
             def branchBuildNumber = branchInfo.last()
             version = VersionNumber (versionNumberString: '${BUILD_NUMBER}', versionPrefix: "${serviceName}-${branchBuildNumber}.")
-            registry = "prodaxregistry.azurecr.io"
+            registry = "rajmca10"
           }
         }
         script {
